@@ -104,4 +104,11 @@ public class Empleado {
 		this.clave = clave;
 	}
 
+	@Override
+	public String toString() {
+		return "Empleado [idEmpleado=" + idEmpleado + ", nombres=" + nombres + ", apellidos=" + apellidos
+				+ ", documento=" + documento + ", fechaNacimiento=" + fechaNacimiento + ", sueldo=" + sueldo
+				+ ", numeroHijos=" + numeroHijos + ", usuario=" + usuario + ", clave=" + clave + "]";
+	}
+	
 }

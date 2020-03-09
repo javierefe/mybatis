@@ -1,6 +1,9 @@
 package com.mitocode;
 
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +14,8 @@ import org.springframework.util.Assert;
 import com.mitocode.mapper.EmpleadoMapper;
 import com.mitocode.model.Empleado;
 
-@SpringBootTest
-@ContextConfiguration
+@SpringBootTest //para que spring reconozca que es una prueba 
+@ContextConfiguration //carga toda la configutacion del proyecto para hacer una prueba
 public class EmpleadoMapperTest {
 
 	@Autowired
@@ -21,13 +24,13 @@ public class EmpleadoMapperTest {
 	@Test
 	public void insert() {
 		Empleado empleado = new Empleado();
-		empleado.setNombres("Dany");
-		empleado.setApellidos("Cenas Vasquez");
-		empleado.setDocumento("12345678");
+		empleado.setNombres("Javier");
+		empleado.setApellidos("Flores");
+		empleado.setDocumento("87654321");
 		empleado.setFechaNacimiento(LocalDate.now());
-		empleado.setSueldo(1500);
+		empleado.setSueldo(2000);
 		empleado.setNumeroHijos(0);
-		empleado.setUsuario("Admin");
+		empleado.setUsuario("admin");
 		empleado.setClave("123456");
 		
 		int status = empleadoMapper.registra(empleado);
@@ -38,12 +41,30 @@ public class EmpleadoMapperTest {
 	public void update() {
 		
 		Empleado empleado = new Empleado();
-		empleado.setNombres("Javier");
+		empleado.setNombres("Diego");
 		empleado.setIdEmpleado(1);
 		
 		int status = empleadoMapper.actualizar(empleado);
 		Assert.state(status == 1,"Update Failed");
 		
+	}
+	
+	@Test
+	public void delete() {
+		Empleado empleado = new Empleado();
+		empleado.setIdEmpleado(3);
+		
+		int status = empleadoMapper.eliminar(empleado);
+		Assert.state(status == 1, "Delete failed");
+		
+	}
+	
+	@Test
+	public void obtener() {
+		
+		List<Empleado> empleado = empleadoMapper.obtenerEmpleado();
+		empleado.forEach(System.out::println);
+
 	}
 	
 	
